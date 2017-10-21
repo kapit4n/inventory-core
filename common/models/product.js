@@ -1,9 +1,17 @@
 'use strict';
 
 module.exports = function (Product) {
-    Product.getName = function (productId, cb) {
-        Product.findById(productId, function (err, instance) {
-            var response = "Name of product is " + instance.name;
+    Product.getStock = function (cb) {
+        Product.find({}, function (err, instance) {
+            var response = instance.map(function(product) {
+                return  {
+                           name: product.name, 
+                           inStock: product.stock,
+                           icon: product.img,
+                           price: product.price,
+                           description: product.description
+                        };
+            });
             cb(null, response);
         });
     }
@@ -28,11 +36,10 @@ module.exports = function (Product) {
         });
     }
     Product.remoteMethod(
-        'getName',
+        'getStock',
         {
-            http: { path: '/getname', verb: 'get' },
-            accepts: { arg: 'id', type: 'string', http: { source: 'query' } },
-            returns: { arg: 'name', type: 'string' }
+            http: { path: '/getstock', verb: 'get' },
+            returns: { arg: 'stocks', type: 'string' }
         }
     );
     Product.remoteMethod(
