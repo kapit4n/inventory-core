@@ -55,5 +55,9 @@
   "purchase-item": {
     "dataSource": "db",
     "public": true
+  },
+  "Vendor": {
+    "dataSource": "db",
+    "public": true
   }
 }
