@@ -7,8 +7,8 @@ module.exports = function (Product) {
                 return  {
                            id: product.id,
                            name: product.name, 
-                           inStock: product.stock,
-                           icon: product.img,
+                           stock: product.stock,
+                           img: product.img,
                            price: product.price,
                            description: product.description
                         };
