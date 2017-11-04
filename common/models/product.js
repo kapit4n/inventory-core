@@ -5,6 +5,7 @@ module.exports = function (Product) {
         Product.find({}, function (err, instance) {
             var response = instance.map(function(product) {
                 return  {
+                           id: product.id,
                            name: product.name, 
                            inStock: product.stock,
                            icon: product.img,
