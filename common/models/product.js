@@ -21,7 +21,7 @@ module.exports = function (Product) {
         Product.findById(productId, function (err, instance) {
             var response = "false";
             if (amount <= instance.stock) {
-                instance.stock = instance.stock - amount;
+                instance.stock = Number(instance.stock) - Number(amount);
                 instance.save();
                 response = "true";
             }
@@ -32,7 +32,7 @@ module.exports = function (Product) {
     Product.addToInventory = function (productId, amount, cb) {
         Product.findById(productId, function (err, instance) {
             var response = "false";
-            instance.stock = instance.stock + amount;
+            instance.stock = Number(instance.stock) + Number(amount);
             instance.save();
             response = "true";
             cb(null, response);
