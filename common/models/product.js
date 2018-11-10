@@ -16,6 +16,29 @@ module.exports = function (Product) {
             cb(null, response);
         });
     }
+    
+    Product.reduceInventory = function (productId, amount, cb) {
+        Product.findById(productId, function (err, instance) {
+            var response = "false";
+            if (amount <= instance.stock) {
+                instance.stock = instance.stock - amount;
+                instance.save();
+                response = "true";
+            }
+            cb(null, response);
+        });
+    }
+    
+    Product.addToInventory = function (productId, amount, cb) {
+        Product.findById(productId, function (err, instance) {
+            var response = "false";
+            instance.stock = instance.stock + amount;
+            instance.save();
+            response = "true";
+            cb(null, response);
+        });
+    }
+    
     Product.updateStock = function (productId, amount, cb) {
         Product.findById(productId, function (err, instance) {
             var response = "false";
@@ -27,6 +50,7 @@ module.exports = function (Product) {
             cb(null, response);
         });
     }
+
     Product.checkStockToUpdate = function (productId, amount, cb) {
         Product.findById(productId, function (err, instance) {
             var response = "false";
@@ -43,6 +67,31 @@ module.exports = function (Product) {
             returns: { arg: 'stocks', type: 'string' }
         }
     );
+    
+    Product.remoteMethod(
+        'reduceInventory',
+        {
+            http: { path: '/reduceInventory', verb: 'get' },
+            accepts: [
+                { arg: 'id', type: 'string', http: { source: 'query' } },
+                { arg: 'amount', type: 'string', http: { source: 'query' } },
+            ],
+            returns: { arg: 'success', type: 'string' }
+        }
+    );
+    
+    Product.remoteMethod(
+        'addToInventory',
+        {
+            http: { path: '/addToInventory', verb: 'get' },
+            accepts: [
+                { arg: 'id', type: 'string', http: { source: 'query' } },
+                { arg: 'amount', type: 'string', http: { source: 'query' } },
+            ],
+            returns: { arg: 'success', type: 'string' }
+        }
+    );
+    
     Product.remoteMethod(
         'updateStock',
         {
@@ -54,6 +103,7 @@ module.exports = function (Product) {
             returns: { arg: 'success', type: 'string' }
         }
     );
+
     Product.remoteMethod(
         'checkStockToUpdate',
         {
