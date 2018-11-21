@@ -26,6 +26,16 @@
       "required": true,
       "default": 0
     },
+    "quantitySelled": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "totalSelled": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
     "img": {
       "type": "string",
       "required": true

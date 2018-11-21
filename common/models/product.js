@@ -29,6 +29,26 @@ module.exports = function (Product) {
         });
     }
     
+    Product.updateQuantitySelled = function (productId, amount, cb) {
+        Product.findById(productId, function (err, instance) {
+            var response = "false";
+            instance.quantitySelled = Number(instance.quantitySelled) + Number(amount);
+            instance.save();
+            response = "true";
+            cb(null, response);
+        });
+    }
+
+    Product.updateTotalSelled = function (productId, amount, cb) {
+        Product.findById(productId, function (err, instance) {
+            var response = "false";
+            instance.totalSelled = Number(instance.totalSelled) + Number(amount);
+            instance.save();
+            response = "true";
+            cb(null, response);
+        });
+    }
+
     Product.addToInventory = function (productId, amount, cb) {
         Product.findById(productId, function (err, instance) {
             var response = "false";
@@ -103,6 +123,30 @@ module.exports = function (Product) {
             returns: { arg: 'success', type: 'string' }
         }
     );
+    
+    Product.remoteMethod(
+        'updateQuantitySelled',
+        {
+            http: { path: '/updateQuantitySelled', verb: 'get' },
+            accepts: [
+                { arg: 'id', type: 'string', http: { source: 'query' } },
+                { arg: 'amount', type: 'string', http: { source: 'query' } },
+            ],
+            returns: { arg: 'success', type: 'string' }
+        }
+    );
+    
+    Product.remoteMethod(
+        'updateTotalSelled',
+        {
+            http: { path: '/updateTotalSelled', verb: 'get' },
+            accepts: [
+                { arg: 'id', type: 'string', http: { source: 'query' } },
+                { arg: 'amount', type: 'string', http: { source: 'query' } },
+            ],
+            returns: { arg: 'success', type: 'string' }
+        }
+    );
 
     Product.remoteMethod(
         'checkStockToUpdate',
@@ -115,4 +159,5 @@ module.exports = function (Product) {
             returns: { arg: 'success', type: 'string' }
         }
     );
+
 };
