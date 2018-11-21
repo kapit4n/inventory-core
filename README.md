@@ -1,5 +1,14 @@
 # My Application
 
+## Resources
+* customer
+* orderDetail
+* product
+* purchase-item
+* purchase-order
+* user
+* vendor
+
 ## Install and Run
 * clone repo
 * projectPath/server
