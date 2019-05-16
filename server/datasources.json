@@ -1,12 +1,11 @@
 {
   "db": {
-    "host": "localhost",
-    "port": 27017,
+    "host": "127.0.0.1",
     "url": "",
-    "database": "reactseller",
+    "database": "inventorycore",
     "password": "password",
     "name": "db",
-    "user": "reactseller",
+    "user": "inventorycore",
     "connector": "mongodb"
   }
 }

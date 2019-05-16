@@ -26,3 +26,8 @@
 * /customers
 * /vendors
 * /products
+
+# Create the db
+* `use inventorycore`
+* `db.createUser({ user: "inventorycore", pwd: "password", roles: [ "readWrite", "dbAdmin" ] });`
+
