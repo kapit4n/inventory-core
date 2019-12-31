@@ -1,0 +1,17 @@
+{
+    "name": "User",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
+    },
+    "acls": [
+        {
+            // allow all users sto get users by now
+            "accessType": "*",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "ALLOW"
+        }
+    ]
+}
