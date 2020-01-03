@@ -1,17 +1,19 @@
 {
-    "name": "User",
-    "base": "PersistedModel",
-    "idInjection": true,
-    "options": {
-        "validateUpsert": true
-    },
-    "acls": [
-        {
-            // allow all users sto get users by now
-            "accessType": "*",
-            "principalType": "ROLE",
-            "principalId": "$everyone",
-            "permission": "ALLOW"
-        }
-    ]
+  "name": "user",
+  "base": "User",
+  "idInjection": true,
+  "restrictResetPasswordTokenScope": true,
+  "emailVerificationRequired": true,
+  "properties": {},
+  "validations": [],
+  },
+  "acls": [
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
 }
